@@ -3,9 +3,9 @@ beta_2.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000238  00000000  00000000  00000054  2**1
+  0 .text         0000026a  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .comment      00000030  00000000  00000000  0000028c  2**0
+  1 .comment      00000030  00000000  00000000  000002be  2**0
                   CONTENTS, READONLY
 
 Disassembly of section .text:
@@ -38,8 +38,8 @@ Disassembly of section .text:
   2c:	d4 e0       	ldi	r29, 0x04	; 4
   2e:	de bf       	out	0x3e, r29	; 62
   30:	cd bf       	out	0x3d, r28	; 61
-  32:	99 d0       	rcall	.+306    	; 0x166 <main>
-  34:	ff c0       	rjmp	.+510    	; 0x234 <_exit>
+  32:	ae d0       	rcall	.+348    	; 0x190 <main>
+  34:	18 c1       	rjmp	.+560    	; 0x266 <_exit>
 
 00000036 <__bad_interrupt>:
   36:	e4 cf       	rjmp	.-56     	; 0x0 <__vectors>
@@ -87,7 +87,7 @@ Disassembly of section .text:
   7a:	be 01       	movw	r22, r28
   7c:	6f 5f       	subi	r22, 0xFF	; 255
   7e:	7f 4f       	sbci	r23, 0xFF	; 255
-  80:	9c d0       	rcall	.+312    	; 0x1ba <itoa>
+  80:	b5 d0       	rcall	.+362    	; 0x1ec <itoa>
   82:	ce 01       	movw	r24, r28
   84:	01 96       	adiw	r24, 0x01	; 1
   86:	e3 df       	rcall	.-58     	; 0x4e <uart_puts>
@@ -116,224 +116,251 @@ Disassembly of section .text:
   ac:	c0 98       	cbi	0x18, 0	; 24
   ae:	08 95       	ret
 
-000000b0 <dataPortOutput>:
-  b0:	8f ef       	ldi	r24, 0xFF	; 255
-  b2:	84 bb       	out	0x14, r24	; 20
-  b4:	81 b3       	in	r24, 0x11	; 17
-  b6:	80 66       	ori	r24, 0x60	; 96
-  b8:	81 bb       	out	0x11, r24	; 17
-  ba:	08 95       	ret
+000000b0 <initLatch2>:
+  b0:	b9 9a       	sbi	0x17, 1	; 23
+  b2:	c1 98       	cbi	0x18, 1	; 24
+  b4:	08 95       	ret
 
-000000bc <dataPortInput>:
-  bc:	80 ec       	ldi	r24, 0xC0	; 192
-  be:	84 bb       	out	0x14, r24	; 20
-  c0:	81 b3       	in	r24, 0x11	; 17
-  c2:	8f 79       	andi	r24, 0x9F	; 159
-  c4:	81 bb       	out	0x11, r24	; 17
-  c6:	08 95       	ret
+000000b6 <dataPortOutput>:
+  b6:	8f ef       	ldi	r24, 0xFF	; 255
+  b8:	84 bb       	out	0x14, r24	; 20
+  ba:	81 b3       	in	r24, 0x11	; 17
+  bc:	80 66       	ori	r24, 0x60	; 96
+  be:	81 bb       	out	0x11, r24	; 17
+  c0:	08 95       	ret
 
-000000c8 <setAddress>:
-  c8:	cf 93       	push	r28
-  ca:	df 93       	push	r29
-  cc:	1f 92       	push	r1
-  ce:	cd b7       	in	r28, 0x3d	; 61
-  d0:	de b7       	in	r29, 0x3e	; 62
-  d2:	89 83       	std	Y+1, r24	; 0x01
-  d4:	ed df       	rcall	.-38     	; 0xb0 <dataPortOutput>
-  d6:	20 ec       	ldi	r18, 0xC0	; 192
-  d8:	25 bb       	out	0x15, r18	; 21
-  da:	92 b3       	in	r25, 0x12	; 18
-  dc:	9f 79       	andi	r25, 0x9F	; 159
-  de:	92 bb       	out	0x12, r25	; 18
-  e0:	35 b3       	in	r19, 0x15	; 21
-  e2:	89 81       	ldd	r24, Y+1	; 0x01
-  e4:	98 2f       	mov	r25, r24
-  e6:	9f 73       	andi	r25, 0x3F	; 63
-  e8:	93 2b       	or	r25, r19
-  ea:	95 bb       	out	0x15, r25	; 21
-  ec:	92 b3       	in	r25, 0x12	; 18
-  ee:	80 7c       	andi	r24, 0xC0	; 192
-  f0:	86 95       	lsr	r24
-  f2:	89 2b       	or	r24, r25
-  f4:	82 bb       	out	0x12, r24	; 18
-  f6:	c0 9a       	sbi	0x18, 0	; 24
-  f8:	c0 98       	cbi	0x18, 0	; 24
-  fa:	25 bb       	out	0x15, r18	; 21
-  fc:	82 b3       	in	r24, 0x12	; 18
-  fe:	8f 79       	andi	r24, 0x9F	; 159
- 100:	82 bb       	out	0x12, r24	; 18
- 102:	0f 90       	pop	r0
- 104:	df 91       	pop	r29
- 106:	cf 91       	pop	r28
- 108:	08 95       	ret
+000000c2 <dataPortInput>:
+  c2:	80 ec       	ldi	r24, 0xC0	; 192
+  c4:	84 bb       	out	0x14, r24	; 20
+  c6:	81 b3       	in	r24, 0x11	; 17
+  c8:	8f 79       	andi	r24, 0x9F	; 159
+  ca:	81 bb       	out	0x11, r24	; 17
+  cc:	08 95       	ret
 
-0000010a <writeByte>:
- 10a:	cf 93       	push	r28
- 10c:	df 93       	push	r29
- 10e:	1f 92       	push	r1
- 110:	cd b7       	in	r28, 0x3d	; 61
- 112:	de b7       	in	r29, 0x3e	; 62
- 114:	89 83       	std	Y+1, r24	; 0x01
- 116:	cc df       	rcall	.-104    	; 0xb0 <dataPortOutput>
- 118:	20 ec       	ldi	r18, 0xC0	; 192
- 11a:	25 bb       	out	0x15, r18	; 21
- 11c:	92 b3       	in	r25, 0x12	; 18
- 11e:	9f 79       	andi	r25, 0x9F	; 159
- 120:	92 bb       	out	0x12, r25	; 18
- 122:	35 b3       	in	r19, 0x15	; 21
- 124:	89 81       	ldd	r24, Y+1	; 0x01
- 126:	98 2f       	mov	r25, r24
- 128:	9f 73       	andi	r25, 0x3F	; 63
- 12a:	93 2b       	or	r25, r19
- 12c:	95 bb       	out	0x15, r25	; 21
- 12e:	92 b3       	in	r25, 0x12	; 18
- 130:	80 7c       	andi	r24, 0xC0	; 192
- 132:	86 95       	lsr	r24
- 134:	89 2b       	or	r24, r25
- 136:	82 bb       	out	0x12, r24	; 18
- 138:	92 98       	cbi	0x12, 2	; 18
- 13a:	92 9a       	sbi	0x12, 2	; 18
- 13c:	25 bb       	out	0x15, r18	; 21
- 13e:	82 b3       	in	r24, 0x12	; 18
- 140:	8f 79       	andi	r24, 0x9F	; 159
- 142:	82 bb       	out	0x12, r24	; 18
- 144:	0f 90       	pop	r0
- 146:	df 91       	pop	r29
- 148:	cf 91       	pop	r28
- 14a:	08 95       	ret
+000000ce <setAddress>:
+  ce:	cf 93       	push	r28
+  d0:	df 93       	push	r29
+  d2:	00 d0       	rcall	.+0      	; 0xd4 <setAddress+0x6>
+  d4:	cd b7       	in	r28, 0x3d	; 61
+  d6:	de b7       	in	r29, 0x3e	; 62
+  d8:	89 83       	std	Y+1, r24	; 0x01
+  da:	9a 83       	std	Y+2, r25	; 0x02
+  dc:	ec df       	rcall	.-40     	; 0xb6 <dataPortOutput>
+  de:	20 ec       	ldi	r18, 0xC0	; 192
+  e0:	25 bb       	out	0x15, r18	; 21
+  e2:	32 b3       	in	r19, 0x12	; 18
+  e4:	3f 79       	andi	r19, 0x9F	; 159
+  e6:	32 bb       	out	0x12, r19	; 18
+  e8:	45 b3       	in	r20, 0x15	; 21
+  ea:	89 81       	ldd	r24, Y+1	; 0x01
+  ec:	38 2f       	mov	r19, r24
+  ee:	3f 73       	andi	r19, 0x3F	; 63
+  f0:	34 2b       	or	r19, r20
+  f2:	35 bb       	out	0x15, r19	; 21
+  f4:	32 b3       	in	r19, 0x12	; 18
+  f6:	80 7c       	andi	r24, 0xC0	; 192
+  f8:	86 95       	lsr	r24
+  fa:	83 2b       	or	r24, r19
+  fc:	82 bb       	out	0x12, r24	; 18
+  fe:	c0 9a       	sbi	0x18, 0	; 24
+ 100:	c0 98       	cbi	0x18, 0	; 24
+ 102:	25 bb       	out	0x15, r18	; 21
+ 104:	82 b3       	in	r24, 0x12	; 18
+ 106:	8f 79       	andi	r24, 0x9F	; 159
+ 108:	82 bb       	out	0x12, r24	; 18
+ 10a:	35 b3       	in	r19, 0x15	; 21
+ 10c:	9a 81       	ldd	r25, Y+2	; 0x02
+ 10e:	89 2f       	mov	r24, r25
+ 110:	8f 73       	andi	r24, 0x3F	; 63
+ 112:	83 2b       	or	r24, r19
+ 114:	85 bb       	out	0x15, r24	; 21
+ 116:	82 b3       	in	r24, 0x12	; 18
+ 118:	96 95       	lsr	r25
+ 11a:	98 2b       	or	r25, r24
+ 11c:	92 bb       	out	0x12, r25	; 18
+ 11e:	c1 9a       	sbi	0x18, 1	; 24
+ 120:	c1 98       	cbi	0x18, 1	; 24
+ 122:	25 bb       	out	0x15, r18	; 21
+ 124:	82 b3       	in	r24, 0x12	; 18
+ 126:	8f 79       	andi	r24, 0x9F	; 159
+ 128:	82 bb       	out	0x12, r24	; 18
+ 12a:	0f 90       	pop	r0
+ 12c:	0f 90       	pop	r0
+ 12e:	df 91       	pop	r29
+ 130:	cf 91       	pop	r28
+ 132:	08 95       	ret
 
-0000014c <readByte>:
- 14c:	b7 df       	rcall	.-146    	; 0xbc <dataPortInput>
- 14e:	93 98       	cbi	0x12, 3	; 18
- 150:	85 e0       	ldi	r24, 0x05	; 5
- 152:	8a 95       	dec	r24
- 154:	f1 f7       	brne	.-4      	; 0x152 <readByte+0x6>
- 156:	00 00       	nop
- 158:	93 b3       	in	r25, 0x13	; 19
- 15a:	80 b3       	in	r24, 0x10	; 16
- 15c:	80 76       	andi	r24, 0x60	; 96
- 15e:	88 0f       	add	r24, r24
- 160:	93 9a       	sbi	0x12, 3	; 18
- 162:	89 2b       	or	r24, r25
- 164:	08 95       	ret
+00000134 <writeByte>:
+ 134:	cf 93       	push	r28
+ 136:	df 93       	push	r29
+ 138:	1f 92       	push	r1
+ 13a:	cd b7       	in	r28, 0x3d	; 61
+ 13c:	de b7       	in	r29, 0x3e	; 62
+ 13e:	89 83       	std	Y+1, r24	; 0x01
+ 140:	ba df       	rcall	.-140    	; 0xb6 <dataPortOutput>
+ 142:	20 ec       	ldi	r18, 0xC0	; 192
+ 144:	25 bb       	out	0x15, r18	; 21
+ 146:	92 b3       	in	r25, 0x12	; 18
+ 148:	9f 79       	andi	r25, 0x9F	; 159
+ 14a:	92 bb       	out	0x12, r25	; 18
+ 14c:	35 b3       	in	r19, 0x15	; 21
+ 14e:	89 81       	ldd	r24, Y+1	; 0x01
+ 150:	98 2f       	mov	r25, r24
+ 152:	9f 73       	andi	r25, 0x3F	; 63
+ 154:	93 2b       	or	r25, r19
+ 156:	95 bb       	out	0x15, r25	; 21
+ 158:	92 b3       	in	r25, 0x12	; 18
+ 15a:	80 7c       	andi	r24, 0xC0	; 192
+ 15c:	86 95       	lsr	r24
+ 15e:	89 2b       	or	r24, r25
+ 160:	82 bb       	out	0x12, r24	; 18
+ 162:	92 98       	cbi	0x12, 2	; 18
+ 164:	92 9a       	sbi	0x12, 2	; 18
+ 166:	25 bb       	out	0x15, r18	; 21
+ 168:	82 b3       	in	r24, 0x12	; 18
+ 16a:	8f 79       	andi	r24, 0x9F	; 159
+ 16c:	82 bb       	out	0x12, r24	; 18
+ 16e:	0f 90       	pop	r0
+ 170:	df 91       	pop	r29
+ 172:	cf 91       	pop	r28
+ 174:	08 95       	ret
 
-00000166 <main>:
- 166:	87 e6       	ldi	r24, 0x67	; 103
- 168:	90 e0       	ldi	r25, 0x00	; 0
- 16a:	66 df       	rcall	.-308    	; 0x38 <initUSART>
- 16c:	9e df       	rcall	.-196    	; 0xaa <initLatch1>
- 16e:	80 e0       	ldi	r24, 0x00	; 0
- 170:	ab df       	rcall	.-170    	; 0xc8 <setAddress>
- 172:	93 df       	rcall	.-218    	; 0x9a <initSRAMControl>
- 174:	c0 e4       	ldi	r28, 0x40	; 64
- 176:	8c 2f       	mov	r24, r28
- 178:	a7 df       	rcall	.-178    	; 0xc8 <setAddress>
- 17a:	80 ec       	ldi	r24, 0xC0	; 192
- 17c:	8c 0f       	add	r24, r28
- 17e:	c5 df       	rcall	.-118    	; 0x10a <writeByte>
- 180:	cf 5f       	subi	r28, 0xFF	; 255
- 182:	c0 3c       	cpi	r28, 0xC0	; 192
- 184:	c1 f7       	brne	.-16     	; 0x176 <main+0x10>
- 186:	c0 e4       	ldi	r28, 0x40	; 64
- 188:	cf 5f       	subi	r28, 0xFF	; 255
- 18a:	c1 3c       	cpi	r28, 0xC1	; 193
- 18c:	18 f0       	brcs	.+6      	; 0x194 <main+0x2e>
- 18e:	81 e2       	ldi	r24, 0x21	; 33
- 190:	5a df       	rcall	.-332    	; 0x46 <sendUSART>
- 192:	c0 e4       	ldi	r28, 0x40	; 64
- 194:	8c 2f       	mov	r24, r28
- 196:	98 df       	rcall	.-208    	; 0xc8 <setAddress>
- 198:	d9 df       	rcall	.-78     	; 0x14c <readByte>
- 19a:	6a e0       	ldi	r22, 0x0A	; 10
- 19c:	70 e0       	ldi	r23, 0x00	; 0
- 19e:	90 e0       	ldi	r25, 0x00	; 0
- 1a0:	61 df       	rcall	.-318    	; 0x64 <uart_putint>
- 1a2:	8d e2       	ldi	r24, 0x2D	; 45
- 1a4:	50 df       	rcall	.-352    	; 0x46 <sendUSART>
- 1a6:	2f ef       	ldi	r18, 0xFF	; 255
- 1a8:	83 ed       	ldi	r24, 0xD3	; 211
- 1aa:	90 e3       	ldi	r25, 0x30	; 48
- 1ac:	21 50       	subi	r18, 0x01	; 1
- 1ae:	80 40       	sbci	r24, 0x00	; 0
- 1b0:	90 40       	sbci	r25, 0x00	; 0
- 1b2:	e1 f7       	brne	.-8      	; 0x1ac <main+0x46>
- 1b4:	00 c0       	rjmp	.+0      	; 0x1b6 <main+0x50>
- 1b6:	00 00       	nop
- 1b8:	e7 cf       	rjmp	.-50     	; 0x188 <main+0x22>
+00000176 <readByte>:
+ 176:	a5 df       	rcall	.-182    	; 0xc2 <dataPortInput>
+ 178:	93 98       	cbi	0x12, 3	; 18
+ 17a:	85 e0       	ldi	r24, 0x05	; 5
+ 17c:	8a 95       	dec	r24
+ 17e:	f1 f7       	brne	.-4      	; 0x17c <readByte+0x6>
+ 180:	00 00       	nop
+ 182:	93 b3       	in	r25, 0x13	; 19
+ 184:	80 b3       	in	r24, 0x10	; 16
+ 186:	80 76       	andi	r24, 0x60	; 96
+ 188:	88 0f       	add	r24, r24
+ 18a:	93 9a       	sbi	0x12, 3	; 18
+ 18c:	89 2b       	or	r24, r25
+ 18e:	08 95       	ret
 
-000001ba <itoa>:
- 1ba:	45 32       	cpi	r20, 0x25	; 37
- 1bc:	51 05       	cpc	r21, r1
- 1be:	18 f4       	brcc	.+6      	; 0x1c6 <itoa+0xc>
- 1c0:	42 30       	cpi	r20, 0x02	; 2
- 1c2:	08 f0       	brcs	.+2      	; 0x1c6 <itoa+0xc>
- 1c4:	04 c0       	rjmp	.+8      	; 0x1ce <__itoa_ncheck>
- 1c6:	fb 01       	movw	r30, r22
- 1c8:	10 82       	st	Z, r1
- 1ca:	cb 01       	movw	r24, r22
- 1cc:	08 95       	ret
+00000190 <main>:
+ 190:	87 e6       	ldi	r24, 0x67	; 103
+ 192:	90 e0       	ldi	r25, 0x00	; 0
+ 194:	51 df       	rcall	.-350    	; 0x38 <initUSART>
+ 196:	89 df       	rcall	.-238    	; 0xaa <initLatch1>
+ 198:	8b df       	rcall	.-234    	; 0xb0 <initLatch2>
+ 19a:	80 e0       	ldi	r24, 0x00	; 0
+ 19c:	90 e0       	ldi	r25, 0x00	; 0
+ 19e:	97 df       	rcall	.-210    	; 0xce <setAddress>
+ 1a0:	7c df       	rcall	.-264    	; 0x9a <initSRAMControl>
+ 1a2:	c0 e0       	ldi	r28, 0x00	; 0
+ 1a4:	d0 e0       	ldi	r29, 0x00	; 0
+ 1a6:	ce 01       	movw	r24, r28
+ 1a8:	92 df       	rcall	.-220    	; 0xce <setAddress>
+ 1aa:	8c 2f       	mov	r24, r28
+ 1ac:	c3 df       	rcall	.-122    	; 0x134 <writeByte>
+ 1ae:	21 96       	adiw	r28, 0x01	; 1
+ 1b0:	c1 30       	cpi	r28, 0x01	; 1
+ 1b2:	80 e4       	ldi	r24, 0x40	; 64
+ 1b4:	d8 07       	cpc	r29, r24
+ 1b6:	b9 f7       	brne	.-18     	; 0x1a6 <main+0x16>
+ 1b8:	c0 e0       	ldi	r28, 0x00	; 0
+ 1ba:	d0 e0       	ldi	r29, 0x00	; 0
+ 1bc:	21 96       	adiw	r28, 0x01	; 1
+ 1be:	c1 15       	cp	r28, r1
+ 1c0:	90 e4       	ldi	r25, 0x40	; 64
+ 1c2:	d9 07       	cpc	r29, r25
+ 1c4:	19 f4       	brne	.+6      	; 0x1cc <main+0x3c>
+ 1c6:	81 e2       	ldi	r24, 0x21	; 33
+ 1c8:	3e df       	rcall	.-388    	; 0x46 <sendUSART>
+ 1ca:	ff cf       	rjmp	.-2      	; 0x1ca <main+0x3a>
+ 1cc:	ce 01       	movw	r24, r28
+ 1ce:	7f df       	rcall	.-258    	; 0xce <setAddress>
+ 1d0:	d2 df       	rcall	.-92     	; 0x176 <readByte>
+ 1d2:	6a e0       	ldi	r22, 0x0A	; 10
+ 1d4:	70 e0       	ldi	r23, 0x00	; 0
+ 1d6:	90 e0       	ldi	r25, 0x00	; 0
+ 1d8:	45 df       	rcall	.-374    	; 0x64 <uart_putint>
+ 1da:	8d e2       	ldi	r24, 0x2D	; 45
+ 1dc:	34 df       	rcall	.-408    	; 0x46 <sendUSART>
+ 1de:	8f e9       	ldi	r24, 0x9F	; 159
+ 1e0:	9f e0       	ldi	r25, 0x0F	; 15
+ 1e2:	01 97       	sbiw	r24, 0x01	; 1
+ 1e4:	f1 f7       	brne	.-4      	; 0x1e2 <main+0x52>
+ 1e6:	00 c0       	rjmp	.+0      	; 0x1e8 <main+0x58>
+ 1e8:	00 00       	nop
+ 1ea:	e8 cf       	rjmp	.-48     	; 0x1bc <main+0x2c>
 
-000001ce <__itoa_ncheck>:
- 1ce:	bb 27       	eor	r27, r27
- 1d0:	4a 30       	cpi	r20, 0x0A	; 10
- 1d2:	31 f4       	brne	.+12     	; 0x1e0 <__itoa_ncheck+0x12>
- 1d4:	99 23       	and	r25, r25
- 1d6:	22 f4       	brpl	.+8      	; 0x1e0 <__itoa_ncheck+0x12>
- 1d8:	bd e2       	ldi	r27, 0x2D	; 45
- 1da:	90 95       	com	r25
- 1dc:	81 95       	neg	r24
- 1de:	9f 4f       	sbci	r25, 0xFF	; 255
- 1e0:	01 c0       	rjmp	.+2      	; 0x1e4 <__utoa_common>
+000001ec <itoa>:
+ 1ec:	45 32       	cpi	r20, 0x25	; 37
+ 1ee:	51 05       	cpc	r21, r1
+ 1f0:	18 f4       	brcc	.+6      	; 0x1f8 <itoa+0xc>
+ 1f2:	42 30       	cpi	r20, 0x02	; 2
+ 1f4:	08 f0       	brcs	.+2      	; 0x1f8 <itoa+0xc>
+ 1f6:	04 c0       	rjmp	.+8      	; 0x200 <__itoa_ncheck>
+ 1f8:	fb 01       	movw	r30, r22
+ 1fa:	10 82       	st	Z, r1
+ 1fc:	cb 01       	movw	r24, r22
+ 1fe:	08 95       	ret
 
-000001e2 <__utoa_ncheck>:
- 1e2:	bb 27       	eor	r27, r27
+00000200 <__itoa_ncheck>:
+ 200:	bb 27       	eor	r27, r27
+ 202:	4a 30       	cpi	r20, 0x0A	; 10
+ 204:	31 f4       	brne	.+12     	; 0x212 <__itoa_ncheck+0x12>
+ 206:	99 23       	and	r25, r25
+ 208:	22 f4       	brpl	.+8      	; 0x212 <__itoa_ncheck+0x12>
+ 20a:	bd e2       	ldi	r27, 0x2D	; 45
+ 20c:	90 95       	com	r25
+ 20e:	81 95       	neg	r24
+ 210:	9f 4f       	sbci	r25, 0xFF	; 255
+ 212:	01 c0       	rjmp	.+2      	; 0x216 <__utoa_common>
 
-000001e4 <__utoa_common>:
- 1e4:	fb 01       	movw	r30, r22
- 1e6:	55 27       	eor	r21, r21
- 1e8:	aa 27       	eor	r26, r26
- 1ea:	88 0f       	add	r24, r24
- 1ec:	99 1f       	adc	r25, r25
- 1ee:	aa 1f       	adc	r26, r26
- 1f0:	a4 17       	cp	r26, r20
- 1f2:	10 f0       	brcs	.+4      	; 0x1f8 <__utoa_common+0x14>
- 1f4:	a4 1b       	sub	r26, r20
- 1f6:	83 95       	inc	r24
- 1f8:	50 51       	subi	r21, 0x10	; 16
- 1fa:	b9 f7       	brne	.-18     	; 0x1ea <__utoa_common+0x6>
- 1fc:	a0 5d       	subi	r26, 0xD0	; 208
- 1fe:	aa 33       	cpi	r26, 0x3A	; 58
- 200:	08 f0       	brcs	.+2      	; 0x204 <__utoa_common+0x20>
- 202:	a9 5d       	subi	r26, 0xD9	; 217
- 204:	a1 93       	st	Z+, r26
- 206:	00 97       	sbiw	r24, 0x00	; 0
- 208:	79 f7       	brne	.-34     	; 0x1e8 <__utoa_common+0x4>
- 20a:	b1 11       	cpse	r27, r1
- 20c:	b1 93       	st	Z+, r27
- 20e:	11 92       	st	Z+, r1
- 210:	cb 01       	movw	r24, r22
- 212:	00 c0       	rjmp	.+0      	; 0x214 <strrev>
+00000214 <__utoa_ncheck>:
+ 214:	bb 27       	eor	r27, r27
 
-00000214 <strrev>:
- 214:	dc 01       	movw	r26, r24
- 216:	fc 01       	movw	r30, r24
- 218:	67 2f       	mov	r22, r23
- 21a:	71 91       	ld	r23, Z+
- 21c:	77 23       	and	r23, r23
- 21e:	e1 f7       	brne	.-8      	; 0x218 <strrev+0x4>
- 220:	32 97       	sbiw	r30, 0x02	; 2
- 222:	04 c0       	rjmp	.+8      	; 0x22c <strrev+0x18>
- 224:	7c 91       	ld	r23, X
- 226:	6d 93       	st	X+, r22
- 228:	70 83       	st	Z, r23
- 22a:	62 91       	ld	r22, -Z
- 22c:	ae 17       	cp	r26, r30
- 22e:	bf 07       	cpc	r27, r31
- 230:	c8 f3       	brcs	.-14     	; 0x224 <strrev+0x10>
- 232:	08 95       	ret
+00000216 <__utoa_common>:
+ 216:	fb 01       	movw	r30, r22
+ 218:	55 27       	eor	r21, r21
+ 21a:	aa 27       	eor	r26, r26
+ 21c:	88 0f       	add	r24, r24
+ 21e:	99 1f       	adc	r25, r25
+ 220:	aa 1f       	adc	r26, r26
+ 222:	a4 17       	cp	r26, r20
+ 224:	10 f0       	brcs	.+4      	; 0x22a <__utoa_common+0x14>
+ 226:	a4 1b       	sub	r26, r20
+ 228:	83 95       	inc	r24
+ 22a:	50 51       	subi	r21, 0x10	; 16
+ 22c:	b9 f7       	brne	.-18     	; 0x21c <__utoa_common+0x6>
+ 22e:	a0 5d       	subi	r26, 0xD0	; 208
+ 230:	aa 33       	cpi	r26, 0x3A	; 58
+ 232:	08 f0       	brcs	.+2      	; 0x236 <__utoa_common+0x20>
+ 234:	a9 5d       	subi	r26, 0xD9	; 217
+ 236:	a1 93       	st	Z+, r26
+ 238:	00 97       	sbiw	r24, 0x00	; 0
+ 23a:	79 f7       	brne	.-34     	; 0x21a <__utoa_common+0x4>
+ 23c:	b1 11       	cpse	r27, r1
+ 23e:	b1 93       	st	Z+, r27
+ 240:	11 92       	st	Z+, r1
+ 242:	cb 01       	movw	r24, r22
+ 244:	00 c0       	rjmp	.+0      	; 0x246 <strrev>
 
-00000234 <_exit>:
- 234:	f8 94       	cli
+00000246 <strrev>:
+ 246:	dc 01       	movw	r26, r24
+ 248:	fc 01       	movw	r30, r24
+ 24a:	67 2f       	mov	r22, r23
+ 24c:	71 91       	ld	r23, Z+
+ 24e:	77 23       	and	r23, r23
+ 250:	e1 f7       	brne	.-8      	; 0x24a <strrev+0x4>
+ 252:	32 97       	sbiw	r30, 0x02	; 2
+ 254:	04 c0       	rjmp	.+8      	; 0x25e <strrev+0x18>
+ 256:	7c 91       	ld	r23, X
+ 258:	6d 93       	st	X+, r22
+ 25a:	70 83       	st	Z, r23
+ 25c:	62 91       	ld	r22, -Z
+ 25e:	ae 17       	cp	r26, r30
+ 260:	bf 07       	cpc	r27, r31
+ 262:	c8 f3       	brcs	.-14     	; 0x256 <strrev+0x10>
+ 264:	08 95       	ret
 
-00000236 <__stop_program>:
- 236:	ff cf       	rjmp	.-2      	; 0x236 <__stop_program>
+00000266 <_exit>:
+ 266:	f8 94       	cli
+
+00000268 <__stop_program>:
+ 268:	ff cf       	rjmp	.-2      	; 0x268 <__stop_program>

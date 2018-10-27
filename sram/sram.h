@@ -35,9 +35,10 @@
 
 void initSRAMControl(void);
 void initLatch1(void);
+void initLatch2(void);
 void dataPortOutput(void);
 void dataPortInput(void);
-void setAddress(uint8_t byte);
+void setAddress(uint16_t byte);
 void writeByte(uint8_t byte);
 uint8_t readByte(void);
 

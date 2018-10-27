@@ -21,6 +21,11 @@ void initLatch1(void)
 	DDRB |= (1<<PB0);
 	PORTB &=~(1<<PB0);
 }
+void initLatch2(void)
+{
+	DDRB |= (1<<PB1);
+	PORTB &=~(1<<PB1);
+}
 
 void dataPortOutput(void)
 {
@@ -34,16 +39,28 @@ void dataPortInput(void)
 }
 
 
-void setAddress(uint8_t byte)
+void setAddress(uint16_t byte)
 {
+	uint8_t MSB,LSB;
+	LSB = byte;
+	MSB = byte>>8;
+
 	dataPortOutput();
 	PORTC = 0b11000000;
 	PORTD &= ~((1<<PD5) | (1<<PD6));
-	PORTC |= (0b00111111&byte);
-	byte = byte&0b11000000;
-	PORTD |= byte>>1;
+	PORTC |= (0b00111111&LSB);
+	LSB = LSB&0b11000000;
+	PORTD |= LSB>>1;
 	PORTB |=(1<<PB0);
 	PORTB &=~(1<<PB0);
+	PORTC = 0b11000000;
+	PORTD &= ~((1<<PD5) | (1<<PD6));
+
+	PORTC |= (0b00111111&MSB);
+	LSB = MSB&0b11000000;
+	PORTD |= MSB>>1;
+	PORTB |=(1<<PB1);
+	PORTB &=~(1<<PB1);
 	PORTC = 0b11000000;
 	PORTD &= ~((1<<PD5) | (1<<PD6));
 }

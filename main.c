@@ -14,36 +14,43 @@
 int main()
 {
 	initUSART(MYUBRR);
-	uint8_t data,zapis = 0;
+	uint8_t data,l=0;
+	uint16_t zapis = 0;
 
 	initLatch1();
+	initLatch2();
+
 	setAddress(0b00000000);
 
 	initSRAMControl();
 
-	uint8_t l = 0;
-	for(zapis = 0b01000000; zapis<0b11000000;zapis++,l++)
+
+	for(zapis = 0b0000000000000000; zapis<=0b0100000000000000;zapis++,l++)
 	{
+
 		setAddress(zapis);
 		writeByte(l);
+
 	}
 
-	zapis = 0b01000000;
+
+
+	zapis = 0b0000000000000000;
 
 	while(1)
 	{
 		zapis++;
-		if(zapis>0b11000000)
+		if(zapis==0b0100000000000000)
 			{
 			sendUSART('!');
-			zapis = 0b01000000;
+			while(1);
 			}
 
 		setAddress(zapis);
 		data = readByte();
 		uart_putint(data,10);
 		sendUSART('-');
-		_delay_ms(1000);
+		_delay_ms(1);
 
 	}
 }
