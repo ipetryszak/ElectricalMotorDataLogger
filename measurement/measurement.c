@@ -51,7 +51,8 @@ void startSampling(void)
 			data |= readByte();
 			uart_putint(data,10);
 			data = 0;
-			sendUSART('-');
+			sendUSART(0x0D);
+			sendUSART(0x0A);
 			_delay_ms(2);
 		}
 
