@@ -9,7 +9,11 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include uart/subdir.mk
+-include timers/subdir.mk
 -include sram/subdir.mk
+-include spi/subdir.mk
+-include measurement/subdir.mk
+-include adc/subdir.mk
 -include subdir.mk
 -include objects.mk
 
