@@ -138,7 +138,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x674
+.text           0x00000000      0x676
  *(.vectors)
  .vectors       0x00000000       0x26 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr4/crtm8.o
                 0x00000000                __vector_default
@@ -281,81 +281,81 @@ END GROUP
  .text.sendSPI  0x00000362        0xa ./spi/spi.o
                 0x00000362                sendSPI
  .text.startSampling
-                0x0000036c       0xda ./measurement/measurement.o
+                0x0000036c       0xdc ./measurement/measurement.o
                 0x0000036c                startSampling
  .text.setSamplingChannel
-                0x00000446       0x1c ./measurement/measurement.o
-                0x00000446                setSamplingChannel
+                0x00000448       0x1c ./measurement/measurement.o
+                0x00000448                setSamplingChannel
  .text.setSamplingFreq
-                0x00000462       0x6c ./measurement/measurement.o
-                0x00000462                setSamplingFreq
+                0x00000464       0x6c ./measurement/measurement.o
+                0x00000464                setSamplingFreq
  .text.setSamplingTime
-                0x000004ce       0x54 ./measurement/measurement.o
-                0x000004ce                setSamplingTime
- .text.isSet    0x00000522       0x22 ./measurement/measurement.o
-                0x00000522                isSet
+                0x000004d0       0x54 ./measurement/measurement.o
+                0x000004d0                setSamplingTime
+ .text.isSet    0x00000524       0x22 ./measurement/measurement.o
+                0x00000524                isSet
  .text.isEnoughMemory
-                0x00000544        0xe ./measurement/measurement.o
-                0x00000544                isEnoughMemory
+                0x00000546        0xe ./measurement/measurement.o
+                0x00000546                isEnoughMemory
  .text.setSamplingStart
-                0x00000552       0x2e ./measurement/measurement.o
-                0x00000552                setSamplingStart
- .text.initADC  0x00000580        0x6 ./adc/adc.o
-                0x00000580                initADC
+                0x00000554       0x2e ./measurement/measurement.o
+                0x00000554                setSamplingStart
+ .text.initADC  0x00000582        0x6 ./adc/adc.o
+                0x00000582                initADC
  .text.makeSampleChannelA
-                0x00000586       0x2e ./adc/adc.o
-                0x00000586                makeSampleChannelA
+                0x00000588       0x2e ./adc/adc.o
+                0x00000588                makeSampleChannelA
  .text.makeSampleChannelB
-                0x000005b4       0x2e ./adc/adc.o
-                0x000005b4                makeSampleChannelB
+                0x000005b6       0x2e ./adc/adc.o
+                0x000005b6                makeSampleChannelB
  .text.startup.main
-                0x000005e2       0x14 ./main.o
-                0x000005e2                main
+                0x000005e4       0x14 ./main.o
+                0x000005e4                main
  .text.libgcc.mul
-                0x000005f6        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
+                0x000005f8        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
  .text.libgcc.div
-                0x000005f6        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
- .text.libgcc   0x000005f6        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
+                0x000005f8        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
+ .text.libgcc   0x000005f8        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
  .text.libgcc.prologue
-                0x000005f6        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
+                0x000005f8        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
  .text.libgcc.builtins
-                0x000005f6        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
+                0x000005f8        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
  .text.libgcc.fmul
-                0x000005f6        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
+                0x000005f8        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
  .text.libgcc.fixed
-                0x000005f6        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
+                0x000005f8        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
  .text.libgcc.mul
-                0x000005f6        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_clear_bss.o)
+                0x000005f8        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_clear_bss.o)
  .text.libgcc.div
-                0x000005f6        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_clear_bss.o)
- .text.libgcc   0x000005f6        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_clear_bss.o)
+                0x000005f8        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x000005f8        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_clear_bss.o)
  .text.libgcc.prologue
-                0x000005f6        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_clear_bss.o)
+                0x000005f8        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_clear_bss.o)
  .text.libgcc.builtins
-                0x000005f6        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_clear_bss.o)
+                0x000005f8        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_clear_bss.o)
  .text.libgcc.fmul
-                0x000005f6        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_clear_bss.o)
+                0x000005f8        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_clear_bss.o)
  .text.libgcc.fixed
-                0x000005f6        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_clear_bss.o)
+                0x000005f8        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_clear_bss.o)
  .text.avr-libc
-                0x000005f6       0x14 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr4\libc.a(itoa.o)
-                0x000005f6                __itoa
-                0x000005f6                itoa
+                0x000005f8       0x14 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr4\libc.a(itoa.o)
+                0x000005f8                __itoa
+                0x000005f8                itoa
  .text.avr-libc
-                0x0000060a       0x14 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr4\libc.a(itoa_ncheck.o)
-                0x0000060a                __itoa_ncheck
+                0x0000060c       0x14 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr4\libc.a(itoa_ncheck.o)
+                0x0000060c                __itoa_ncheck
  .text.avr-libc
-                0x0000061e       0x32 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr4\libc.a(utoa_ncheck.o)
-                0x0000061e                __utoa_ncheck
-                0x00000620                __utoa_common
+                0x00000620       0x32 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr4\libc.a(utoa_ncheck.o)
+                0x00000620                __utoa_ncheck
+                0x00000622                __utoa_common
  .text.avr-libc
-                0x00000650       0x20 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr4\libc.a(strrev.o)
-                0x00000650                strrev
-                0x00000670                . = ALIGN (0x2)
+                0x00000652       0x20 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr4\libc.a(strrev.o)
+                0x00000652                strrev
+                0x00000672                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000670        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
-                0x00000670                _exit
-                0x00000670                exit
+ .fini9         0x00000672        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
+                0x00000672                _exit
+                0x00000672                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -374,11 +374,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000670        0x4 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
+ .fini0         0x00000672        0x4 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/avr4\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000674                _etext = .
+                0x00000676                _etext = .
 
-.data           0x00800060        0x0 load address 0x00000674
+.data           0x00800060        0x0 load address 0x00000676
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 c:/program files (x86)/atmel/avr tools/avr toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr4/crtm8.o
@@ -434,8 +434,8 @@ END GROUP
                 0x00800069                currentSamples
                 0x0080008b                newSettings
                 0x0080008f                PROVIDE (__bss_end, .)
-                0x00000674                __data_load_start = LOADADDR (.data)
-                0x00000674                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000676                __data_load_start = LOADADDR (.data)
+                0x00000676                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0080008f        0x0
                 0x0080008f                PROVIDE (__noinit_start, .)

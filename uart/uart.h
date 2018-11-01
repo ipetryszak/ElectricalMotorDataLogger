@@ -10,7 +10,7 @@
 
 
 #define FOSC 16000000// Clock Speed
-#define BAUD 9600
+#define BAUD 38400
 #define MYUBRR FOSC/16/BAUD-1
 
 void initUSART(unsigned int ubrr);

@@ -25,10 +25,6 @@ int main()
 	initLatch2();
 	initSRAMControl();
 
-//	_delay_ms(15000);
-	//initTimer2();
-
-
-
 	while(1);
+
 }

@@ -36,7 +36,7 @@ void startSampling(void)
 	currentSample++;
 
 	if(currentSample>amountOfSamples)
-		{
+	{
 
 		stopTimer2(); //stop sampling
 		uint16_t add;
@@ -51,17 +51,12 @@ void startSampling(void)
 			uart_putint(data,10);
 			data = 0;
 			sendUSART(',');
-		//	sendUSART(0x0D);
-		//	sendUSART(0x0A);
-			_delay_ms(1);
 		}
-
-
 		sendUSART('!');
-		while(1);
+		address = 0b0000000000000000;
+		currentSample = 0;
 
-
-		}
+	}
 }
 
 
