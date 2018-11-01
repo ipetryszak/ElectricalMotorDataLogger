@@ -11,8 +11,8 @@
 struct settings
 {
 	uint8_t channel;
-	uint8_t period;
-	uint16_t amountOfSamples;
+	uint8_t samplingTime;
+	uint16_t frequency;
 };
 
 struct samples
@@ -25,8 +25,15 @@ struct samples
 struct settings newSettings;
 struct samples currentSamples;
 
-void setSettings(uint8_t,uint8_t);
+uint16_t amountOfSamples;
+
 void startSampling(void);
+void setSamplingFreq(char freq);
+void setSamplingTime(char time);
+void setSamplingChannel(char channel);
+void setSamplingStart(char setStart);
+uint8_t isEnoughMemory(uint16_t amountOfSamples);
+uint8_t isSet(void);
 
 
 #endif /* MEASUREMENT_MEASUREMENT_H_ */

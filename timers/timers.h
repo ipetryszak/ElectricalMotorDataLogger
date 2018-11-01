@@ -8,6 +8,7 @@
 #ifndef TIMERS_TIMERS_H_
 #define TIMERS_TIMERS_H_
 
+void setTimer(uint16_t freq);
 void initTimer1(void);
 void initTimer2(void);
 void startTimer2(void);

@@ -8,6 +8,15 @@
 #ifndef SRAM_SRAM_H_
 #define SRAM_SRAM_H_
 
+//------------SIZE MACROS---------------------
+#define MEMORY_SIZE_kb 256
+#define MEMORY_SIZE_kB 32
+#define MEMORY_SIZE_Bytes 32000
+#define MEMORY_SIZE_BYTES_FOR_SAMPLES 16000
+#define MEMORY_BEGIN 0b0000000000000000
+//gonna use just 31744B
+#define MEMORY_END 0b0111110000000000
+//--------------------------------------------
 
 #define SRAM_CONTROL_DDR DDRD
 //SRAM control port

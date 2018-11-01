@@ -21,7 +21,6 @@ void startSampling(void)
 	static uint16_t address = 0b0000000000000000;
 	uint8_t MSB,LSB;
 	static uint16_t currentSample = 0;
-	uint16_t sampl;
 
 
 
@@ -36,13 +35,13 @@ void startSampling(void)
 
 	currentSample++;
 
-	if(currentSample>3000)
+	if(currentSample>amountOfSamples)
 		{
 
 		stopTimer2(); //stop sampling
 		uint16_t add;
 		uint16_t data;
-		sendUSART('@');
+		//sendUSART('@');
 		for(add=0b0000000000000000;add<address;add+=2)
 		{
 			setAddress(add);
@@ -51,17 +50,83 @@ void startSampling(void)
 			data |= readByte();
 			uart_putint(data,10);
 			data = 0;
-			sendUSART(0x0D);
-			sendUSART(0x0A);
-			_delay_ms(2);
+			sendUSART(',');
+		//	sendUSART(0x0D);
+		//	sendUSART(0x0A);
+			_delay_ms(1);
 		}
 
 
-		while(1);
 		sendUSART('!');
+		while(1);
+
 
 		}
+}
 
 
+void setSamplingChannel(char channel)
+{
+	//1 - ch1, 2 - ch2, 3 - ch12
+	if(channel=='1')newSettings.channel = 1;
+	if(channel=='2')newSettings.channel = 2;
+	if(channel=='3')newSettings.channel = 3;
 
 }
+
+void setSamplingFreq(char freq)
+{
+	//in hz
+	if(freq=='0')newSettings.frequency = 1000;
+	if(freq=='1')newSettings.frequency = 2000;
+	if(freq=='2')newSettings.frequency = 3000;
+	if(freq=='3')newSettings.frequency = 4000;
+	if(freq=='4')newSettings.frequency = 5000;
+	if(freq=='5')newSettings.frequency = 6000;
+	if(freq=='6')newSettings.frequency = 7000;
+	if(freq=='7')newSettings.frequency = 8000;
+	if(freq=='8')newSettings.frequency = 9000;
+	if(freq=='9')newSettings.frequency = 10000;
+}
+void setSamplingTime(char time)
+{
+	//in seconds
+	if(time=='0')newSettings.samplingTime = 1;
+	if(time=='1')newSettings.samplingTime = 2;
+	if(time=='2')newSettings.samplingTime = 3;
+	if(time=='3')newSettings.samplingTime = 4;
+	if(time=='4')newSettings.samplingTime = 5;
+	if(time=='5')newSettings.samplingTime = 6;
+	if(time=='6')newSettings.samplingTime = 7;
+	if(time=='7')newSettings.samplingTime = 8;
+	if(time=='8')newSettings.samplingTime = 9;
+	if(time=='9')newSettings.samplingTime = 10;
+}
+
+uint8_t isSet(void)
+{
+	if((newSettings.channel != 0) && (newSettings.frequency != 0) && (newSettings.samplingTime != 0)) return 1;
+	else return 0;
+}
+uint8_t isEnoughMemory(uint16_t amountOfSamples)
+{
+	if(amountOfSamples<=MEMORY_SIZE_BYTES_FOR_SAMPLES) return 1;
+	else return 0;
+}
+void setSamplingStart(char setStart)
+{
+	if(isSet())
+	{
+		amountOfSamples = 0;
+		uint8_t iterator;
+		for(iterator=0;iterator<newSettings.samplingTime;iterator++) amountOfSamples+=newSettings.frequency;
+
+		if(isEnoughMemory(amountOfSamples))
+		{
+			setTimer(newSettings.frequency);
+		}
+
+	}
+
+}
+
