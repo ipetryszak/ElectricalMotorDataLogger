@@ -31,6 +31,7 @@ void startSampling(void);
 void setSamplingFreq(char freq);
 void setSamplingTime(char time);
 void setSamplingChannel(char channel);
+void setSamplingDefaultSettings(void);
 void setSamplingStart(char setStart);
 uint8_t isEnoughMemory(uint16_t amountOfSamples);
 uint8_t isSet(void);

@@ -13,6 +13,7 @@
 #include "spi/spi.h"
 #include "adc/adc.h"
 #include "timers/timers.h"
+#include "measurement/measurement.h"
 
 
 int main()
@@ -24,6 +25,7 @@ int main()
 	initLatch1();
 	initLatch2();
 	initSRAMControl();
+	setSamplingDefaultSettings();
 
 	while(1);
 

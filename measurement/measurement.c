@@ -38,10 +38,10 @@ void startSampling(void)
 	if(currentSample>amountOfSamples)
 	{
 
-		stopTimer2(); //stop sampling
+		stopTimer(); //stop sampling
 		uint16_t add;
 		uint16_t data;
-		//sendUSART('@');
+
 		for(add=0b0000000000000000;add<address;add+=2)
 		{
 			setAddress(add);
@@ -97,7 +97,12 @@ void setSamplingTime(char time)
 	if(time=='8')newSettings.samplingTime = 9;
 	if(time=='9')newSettings.samplingTime = 10;
 }
-
+void setSamplingDefaultSettings(void)
+{
+	setSamplingChannel('1');
+	setSamplingFreq('0');
+	setSamplingTime('0');
+}
 uint8_t isSet(void)
 {
 	if((newSettings.channel != 0) && (newSettings.frequency != 0) && (newSettings.samplingTime != 0)) return 1;
@@ -118,7 +123,7 @@ void setSamplingStart(char setStart)
 
 		if(isEnoughMemory(amountOfSamples))
 		{
-			setTimer(newSettings.frequency);
+			setAndStartTimer(newSettings.frequency);
 		}
 
 	}
