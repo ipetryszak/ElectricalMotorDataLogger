@@ -26,6 +26,9 @@ struct settings newSettings;
 struct samples currentSamples;
 
 uint16_t amountOfSamples;
+uint8_t chosenChannel;
+uint8_t speed2x;
+uint8_t time2xOrNot;
 
 void startSampling(void);
 void setSamplingFreq(char freq);

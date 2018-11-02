@@ -21,10 +21,13 @@ void startSampling(void)
 	static uint16_t address = 0b0000000000000000;
 	uint8_t MSB,LSB;
 	static uint16_t currentSample = 0;
+	static uint8_t toggle = 0;
 
-
-
-	makeSampleChannelA(&MSB,&LSB);
+	if(chosenChannel == 1) makeSampleChannelA(&MSB,&LSB);
+	if(chosenChannel == 2) makeSampleChannelB(&MSB,&LSB);
+	if(chosenChannel == 3 && toggle==0){ makeSampleChannelA(&MSB,&LSB); toggle = 1;}
+	else if(chosenChannel==3 && toggle==1){ makeSampleChannelB(&MSB,&LSB); toggle = 0;}
+	else {}
 
 	setAddress(address);
 	writeByte(MSB);
@@ -118,12 +121,19 @@ void setSamplingStart(char setStart)
 	if(isSet())
 	{
 		amountOfSamples = 0;
+		chosenChannel = newSettings.channel;
+		if(chosenChannel==3)speed2x =1;
+		else speed2x = 0;
+
+		if(chosenChannel==3)time2xOrNot = newSettings.samplingTime + newSettings.samplingTime;
+		else time2xOrNot = newSettings.samplingTime;
+
 		uint8_t iterator;
-		for(iterator=0;iterator<newSettings.samplingTime;iterator++) amountOfSamples+=newSettings.frequency;
+		for(iterator=0;iterator<time2xOrNot;iterator++) amountOfSamples+=newSettings.frequency;
 
 		if(isEnoughMemory(amountOfSamples))
 		{
-			setAndStartTimer(newSettings.frequency);
+			setAndStartTimer(newSettings.frequency,speed2x);
 		}
 
 	}
